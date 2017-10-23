@@ -51,6 +51,7 @@ export function fileToTreeNode(file: File, basePath: string = ""): FileTreeNode 
 
     return new FileTreeNode({
         path: relativePath,
+        originalPath: file.name,
         isDirectory: file.isDirectory,
         contentLength: !file.isDirectory && file.properties.contentLength,
         lastModified: file.properties && file.properties.lastModified,
