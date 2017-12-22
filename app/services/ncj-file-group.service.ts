@@ -14,6 +14,10 @@ export class NcjFileGroupService {
     constructor(
         private storageService: StorageService,
         private pythonRpcService: PythonRpcService) {
+
+        setTimeout(() => {
+            this.downloadWatch("abc", "/Users/tim/dev/test/abc-test").subscribe(() => { });
+        }, 1000);
     }
 
     public createEmptyFileGroup(name: string): Observable<any> {
@@ -61,6 +65,20 @@ export class NcjFileGroupService {
             return Observable.throw(ServerError.fromPython(error));
         });
 
+        return observable;
+    }
+
+    /**
+     * Download a file group and watch for new files
+     */
+    public downloadWatch(fileGroupName: string, localPath: string) {
+        console.log("Download watch start");
+        const observable = this.pythonRpcService.callWithAuth("filegroups/download/watch/start", [
+            fileGroupName,
+            localPath,
+        ]).catch((error) => {
+            return Observable.throw(ServerError.fromPython(error));
+        });
         return observable;
     }
 }
