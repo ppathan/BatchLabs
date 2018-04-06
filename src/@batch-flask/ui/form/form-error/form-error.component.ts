@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy } from "@angular/core";
 import { AbstractControl, ControlContainer, FormGroupDirective } from "@angular/forms";
 import { Subscription } from "rxjs";
 
 @Component({
     selector: "bl-error",
     template: `<div *ngIf="hasError"><ng-content></ng-content></div>`,
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormErrorComponent implements OnChanges, OnDestroy {
 
